@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Automation Project Testing" verbose="1">
+    <test name="AutomationProject">
+        <classes>
+            <class name="CreateNewProfile"></class>
+        </classes>
+    </test>
+</suite>
