@@ -3,7 +3,11 @@
 <suite name="Automation Project Testing" verbose="1">
     <test name="AutomationProject">
         <classes>
-            <class name="CreateNewProfile"></class>
+            <class name="iSkilloTesting.CreateNewProfile"></class>
+            <class name="iSkilloTesting.CreatePost"></class>
+            <class name="iSkilloTesting.DeletePost"></class>
+            <class name="iSkilloTesting.FollowAnotherUser"></class>
+            <class name="iSkilloTesting.Login"></class>
         </classes>
     </test>
 </suite>
