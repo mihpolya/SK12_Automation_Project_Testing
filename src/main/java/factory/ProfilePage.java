@@ -22,6 +22,11 @@ public class ProfilePage {
         return wait.until(ExpectedConditions.urlToBe(PAGE_URL + userId));
 
     }
+    public boolean isUrlLoaded(){
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        return wait.until(ExpectedConditions.urlContains(PAGE_URL));
+
+    }
 
 //    public int numberOfPosts(){
 //        postElements.

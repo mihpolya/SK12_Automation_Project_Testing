@@ -1,10 +1,10 @@
 package iSkilloTesting;
-import object.*;
+//import object.*;
 import factory.*;
-import object.Header;
-import object.HomePage;
-import object.LoginPage;
-import object.ProfilePage;
+//import object.Header;
+//import object.HomePage;
+//import object.LoginPage;
+//import object.ProfilePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -12,10 +12,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginTest extends TestObject{
-
-
-    WebDriver webDriver = super.getWebDriver();
-
     @DataProvider(name="getUser")
     public Object[][] getUsers(){
         return new Object[][]{
@@ -27,7 +23,7 @@ public class LoginTest extends TestObject{
 
     @Test(dataProvider = "getUser")
     public void loginTest(String username, String password, String userId){
-       // WebDriver webDriver = super.getWebDriver();
+        WebDriver webDriver = super.getWebDriver();
         Header header = new Header(webDriver);
         LoginPage loginPage = new LoginPage(webDriver);
         ProfilePage profilePage = new ProfilePage(webDriver);
@@ -39,7 +35,7 @@ public class LoginTest extends TestObject{
         header.clickLogin();
         Assert.assertTrue(loginPage.isUrlLoaded(), "Current page is not Login");
 
-        loginPage.fillInUsername(username);
+        loginPage.fillInUserName(username);
         loginPage.fillInPassword(password);
         loginPage.checkRememberMe();
         Assert.assertTrue(loginPage.isCheckedRememberMe(), "Remember me checkbox is not checked.");
