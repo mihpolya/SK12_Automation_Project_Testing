@@ -15,7 +15,7 @@ public class CreatePost extends TestObject{
             String caption = "Testing upload file";
         return new Object[][]{
                 //To pass the first data object the userId needs to be changed to 5508
-                {"mihpolyaTest","Tyui123Tyuio", "5737"}
+                {"mihpolyaTest","Tyui123Tyuio", "5737", postPicture, caption}
         };
     }
 

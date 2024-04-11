@@ -49,6 +49,7 @@ public class PostPage {
 
     public void clickCreatePost(){
         //create validation with createPostButton.isEnabled();
+       // Assert.
         createPostButton.click();
     }
 }
