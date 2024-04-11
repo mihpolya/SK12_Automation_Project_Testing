@@ -2,10 +2,13 @@ package iSkilloTesting;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -22,9 +25,11 @@ import java.util.Map;
 public class TestObject {
     public static final String TEST_RESOURCES_DIR = "src\\test\\resources\\";
     public static final String DOWNLOAD_DIR = TEST_RESOURCES_DIR.concat("download\\");
+    public static final String SCREENSHOTS_DIR = TEST_RESOURCES_DIR.concat("screenshots\\");
     private WebDriver webDriver;
     @BeforeSuite
-    protected final void setupTestSuite(){
+    protected final void setupTestSuite() throws IOException{
+        cleanDirectory(SCREENSHOTS_DIR);
         WebDriverManager.chromedriver().setup();
     }
 
@@ -36,9 +41,11 @@ public class TestObject {
         this.webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
     @AfterMethod
-    protected final void tearDownTest(){
+    protected final void tearDownTest(ITestResult testResult){
+        takeScreenshot(testResult);
         quitDriver();
     }
+
     @AfterSuite
     public void deleteDownloadFiles() throws IOException{
      //   cleanDirectory(DOWNLOAD_DIR);
@@ -82,6 +89,20 @@ public class TestObject {
             System.out.printf("Unable to delete the files in Directory:%s%n", directoryPath);
 
 
+        }
+    }
+    private void takeScreenshot(ITestResult testResult){
+        if(ITestResult.FAILURE == testResult.getStatus()){
+            try{
+                TakesScreenshot takesScreenshot = (TakesScreenshot) webDriver;
+                File screenshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
+                //name the screenshot with the name of the test
+                String testName = testResult.getName();
+                //save the screenshot in a specific folder
+                FileUtils.copyFile(screenshot, new File(SCREENSHOTS_DIR.concat(testName).concat(".jpg")));
+            }catch (IOException error){
+                System.out.println("Unable to create a screenshot file: " + error.getMessage());
+            }
         }
     }
 
