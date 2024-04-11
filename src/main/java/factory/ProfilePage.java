@@ -13,6 +13,8 @@ public class ProfilePage {
     private final WebDriver webDriver;
     @FindBy(xpath = "//*[@class='post-img']")
     private WebElement postElements;
+    @FindBy(xpath = "//*[@class='fas fa-comment']")
+    private WebElement availablePost;
     public ProfilePage(WebDriver driver){
         this.webDriver = driver;
     }
@@ -27,9 +29,8 @@ public class ProfilePage {
         return wait.until(ExpectedConditions.urlContains(PAGE_URL));
 
     }
+    public boolean isPostAvailable(){
+        WebElement.
+    }
 
-//    public int numberOfPosts(){
-//        postElements.
-//
-//    }
 }

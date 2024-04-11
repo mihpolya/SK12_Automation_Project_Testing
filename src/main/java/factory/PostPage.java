@@ -52,4 +52,18 @@ public class PostPage {
        // Assert.
         createPostButton.click();
     }
+
+    public void quickPost(String username, String password, File postPicture, String caption){
+        LoginPage loginPage = new LoginPage(webDriver);
+        Header header = new Header(webDriver);
+        PostPage postPage = new PostPage(webDriver);
+        loginPage.navigateTo();
+        loginPage.completeSignIn(username, password);
+        header.clickProfile();
+        header.clickNewPost();
+        postPage.uploadPicture(postPicture);
+        postPage.typePostCaption(caption);
+        postPage.clickCreatePost();
+
+    }
 }

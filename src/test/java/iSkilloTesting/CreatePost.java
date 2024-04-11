@@ -14,7 +14,7 @@ public class CreatePost extends TestObject{
             File postPicture = new File("src\\test\\resources\\upload\\robin.png");
             String caption = "Testing upload file";
         return new Object[][]{
-                //To pass the first data object the userId needs to be changed to 5508
+
                 {"mihpolyaTest","Tyui123Tyuio", "5737", postPicture, caption}
         };
     }
@@ -30,12 +30,14 @@ public class CreatePost extends TestObject{
        loginPage.navigateTo();
        Assert.assertTrue(loginPage.isUrlLoaded(), "Current page is not login");
 
-       loginPage.fillInUserName(username);
-       loginPage.fillInPassword(password);
-       loginPage.checkRememberMe();
-       Assert.assertTrue(loginPage.isCheckedRememberMe(), "Remember me checkbox is not checked.");
+       loginPage.completeSignIn(username, password);
 
-       loginPage.clickSignIn();
+//       loginPage.fillInUserName(username);
+//       loginPage.fillInPassword(password);
+//       loginPage.checkRememberMe();
+//       Assert.assertTrue(loginPage.isCheckedRememberMe(), "Remember me checkbox is not checked.");
+//
+//       loginPage.clickSignIn();
        header.clickProfile();
        Assert.assertTrue(profilePage.isUrlLoaded(userId), "Current page is not profile page for "+ userId);
 
