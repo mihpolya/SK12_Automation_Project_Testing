@@ -44,7 +44,7 @@ public class LoginPage {
         passwordTextField.sendKeys(password);
     }
 
-    public void checkrememberMe(){
+    public void checkRememberMe(){
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(rememberMeCheckbox));
         rememberMeCheckbox.click();
@@ -67,7 +67,7 @@ public class LoginPage {
     public void completeSignIn(String username, String password){
         fillInUserName(username);
         fillInPassword(password);
-        checkrememberMe();
+        checkRememberMe();
         clickSignIn();
     }
 }

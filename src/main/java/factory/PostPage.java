@@ -10,6 +10,10 @@ import java.io.File;
 
 public class PostPage {
     private final WebDriver webDriver;
+    public PostPage(WebDriver driver){
+        this.webDriver = driver;
+        PageFactory.initElements(webDriver, this);
+    }
     @FindBy(xpath = "//h3[text()='Post a picture to share with your awesome followers']")
     private WebElement newPostTitle;
     @FindBy(xpath =  "//input[@class='form-control input-lg'][@type='text']")
@@ -18,11 +22,10 @@ public class PostPage {
     private WebElement postCaption;
     @FindBy(id = "create-post")
     private WebElement createPostButton;
-    public PostPage(WebDriver driver){
-        this.webDriver = driver;
-        PageFactory.initElements(webDriver, this);
-    }
 
+    public boolean isNewPostLoaded(){
+        return newPostTitle.isDisplayed();
+    }
     public void uploadPicture(File file){
         WebElement uploadFile = webDriver.findElement(By.xpath("//*[@class='form-group']/input[@type='file']"));
         uploadFile.sendKeys(file.getAbsolutePath());
