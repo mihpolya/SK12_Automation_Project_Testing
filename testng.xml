@@ -7,7 +7,7 @@
             <class name="iSkilloTesting.CreateNewProfile"></class>
             <class name="iSkilloTesting.CreatePost"></class>
             <class name="iSkilloTesting.DeletePost"></class>
-            <class name="iSkilloTesting.FollowAnotherUser"></class>
+            <class name="iSkilloTesting.FollowTest"></class>
             <class name="iSkilloTesting.LoginTest"></class>
         </classes>
     </test>
