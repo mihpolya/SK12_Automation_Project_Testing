@@ -1,17 +1,15 @@
 package factory;
 
-import com.google.common.collect.Iterables;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.LinkedList;
-import java.util.List;
 
 public class ProfilePage {
     public static final String PAGE_URL = "http://training.skillo-bg.com:4300/users/";
@@ -31,8 +29,15 @@ public class ProfilePage {
 
     @FindBy(xpath = "//*[@formcontrolname='publicInfo']")
     public WebElement publicInfoTextArea;
+
+    @FindBy(xpath = "//*[@class='btn btn-primary']")
+    public  WebElement editUserSaveButton;
+
+    @FindBy(xpath = "//*/p/text()")
+    public WebElement profileText;
     public ProfilePage(WebDriver driver){
         this.webDriver = driver;
+        PageFactory.initElements(getDriver(), this);
     }
     public WebDriver getDriver()
     {
@@ -54,12 +59,13 @@ public class ProfilePage {
 
     }
     //check if there is an available post in the profile page - this is for the delete post test
-    public boolean isPostAvailable(){
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.elementToBeClickable(postElements));
+//    public boolean isPostAvailable(){
+//        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+//        wait.until(ExpectedConditions.elementToBeClickable(postElements));
+//
+//        return true;
+//    }
 
-        return true;
-    }
     public void clickLastElement(){
         WebElement lastElement = allPostedElements.getLast();
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
@@ -68,7 +74,7 @@ public class ProfilePage {
     }
 //    public void clickPostedElement(){
 //        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
-//        wait.until(ExpectedConditions.elementToBeClickable(allPostedElements.getLastElement()));
+//        wait.until(ExpectedConditions.elementToBeClickable(lastElement));
 //        postElements.click();
 //    }
     public void clickPostElementDeleteButton(){
@@ -82,7 +88,7 @@ public class ProfilePage {
         confirmDeleteButton.click();
     }
     public void clickEditUserButton(){
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(editUserButton));
         editUserButton.click();
     }
@@ -91,6 +97,15 @@ public class ProfilePage {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOf(publicInfoTextArea));
         publicInfoTextArea.sendKeys(text);
+    }
+    public void clickEditUserSaveButton(){
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.elementToBeClickable(editUserSaveButton));
+        editUserSaveButton.click();
+    }
 
+
+    public String profileText(String text) {
+        return text;
     }
 }

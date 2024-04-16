@@ -14,10 +14,7 @@ import java.io.File;
 public class FollowTest extends TestObject{
     @DataProvider(name="getUser")
     public Object[][] getUsers(){
-        File postPicture = new File("src\\test\\resources\\upload\\robin.png");
-        String caption = "Testing upload file";
         return new Object[][]{
-
                 {"mihpolyaTest","Tyui123Tyuio", "5737"}
         };
     }
@@ -27,7 +24,6 @@ public class FollowTest extends TestObject{
         Header header = new Header(webDriver);
         LoginPage loginPage = new LoginPage(webDriver);
         ProfilePage profilePage = new ProfilePage(webDriver);
-        PostPage postPage = new PostPage(webDriver);
 
         loginPage.navigateTo();
         Assert.assertTrue(loginPage.isUrlLoaded(), "Current page is not login");

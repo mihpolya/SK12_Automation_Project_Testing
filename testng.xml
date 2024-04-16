@@ -4,7 +4,7 @@
     <test name="AutomationProject">
         <classes>
             <class name="iSkilloTesting.TestObject"></class>
-            <class name="iSkilloTesting.CreateNewProfile"></class>
+            <class name="iSkilloTesting.ModifyProfileTest"></class>
             <class name="iSkilloTesting.CreatePost"></class>
             <class name="iSkilloTesting.DeletePost"></class>
             <class name="iSkilloTesting.FollowTest"></class>

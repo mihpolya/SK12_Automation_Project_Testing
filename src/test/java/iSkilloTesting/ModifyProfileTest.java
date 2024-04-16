@@ -2,7 +2,6 @@ package iSkilloTesting;
 
 import factory.Header;
 import factory.LoginPage;
-import factory.PostPage;
 import factory.ProfilePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -14,11 +13,10 @@ import java.io.File;
 public class ModifyProfileTest extends TestObject{
     @DataProvider(name="getUser")
     public Object[][] getUsers(){
-        File postPicture = new File("src\\test\\resources\\upload\\robin.png");
-        String caption = "Testing upload file";
+        String text = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...";
         return new Object[][]{
 
-                {"mihpolyaTest","Tyui123Tyuio", "5737", "this is a very long test text to occupy two rows of text field"}
+                {"mihpolyaTest","Tyui123Tyuio", "5737", text}
         };
     }
     @Test(dataProvider = "getUser")
@@ -34,11 +32,11 @@ public class ModifyProfileTest extends TestObject{
         loginPage.completeSignIn(username, password);
         header.clickProfile();
         Assert.assertTrue(profilePage.isUrlLoaded(userId), "Current page is not profile page for "+ userId);
-        profilePage.editUserButton.click();
+        profilePage.clickEditUserButton();
         profilePage.fillInPublicInfoTextArea(text);
+        profilePage.clickEditUserSaveButton();
+        Assert.assertEquals(profilePage.profileText(text), "Public info does not match the entered text");
 
-        //find save button and click
-        //check if the public info is changed
 
     }
 }
