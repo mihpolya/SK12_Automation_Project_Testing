@@ -15,7 +15,7 @@ public class ProfilePage {
     public static final String PAGE_URL = "http://training.skillo-bg.com:4300/users/";
     private final WebDriver webDriver;
     @FindAll(@FindBy(xpath = "//*[@class='gallery-item-info']"))
-    LinkedList<WebElement> allPostedElements = new LinkedList<>();
+    LinkedList<WebElement> allPostedElements;
 
     @FindBy(xpath = "//*[@class='post-img']")
     private WebElement postElements;
@@ -37,9 +37,9 @@ public class ProfilePage {
     public WebElement profileText;
     public ProfilePage(WebDriver driver){
         this.webDriver = driver;
-        PageFactory.initElements(getDriver(), this);
+        PageFactory.initElements(webDriver(), this);
     }
-    public WebDriver getDriver()
+    public WebDriver webDriver()
     {
         return this.webDriver;
     }

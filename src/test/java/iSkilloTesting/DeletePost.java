@@ -39,7 +39,7 @@ public class DeletePost extends TestObject{
         profilePage.clickLastElement();
         profilePage.clickPostElementDeleteButton();
         profilePage.clickConfirmDeleteButton();
-        //all operations should happen in this @Test
+
     }
 
 }
