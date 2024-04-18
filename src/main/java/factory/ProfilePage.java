@@ -9,13 +9,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.io.*;
 import java.util.LinkedList;
+import java.util.List;
 
 public class ProfilePage {
-    public static final String PAGE_URL = "http://training.skillo-bg.com:4300/users/";
+    public static final String PAGE_URL = "http://training.skillo-bg.com:4200/users/";
     private final WebDriver webDriver;
-    @FindAll(@FindBy(xpath = "//*[@class='gallery-item-info']"))
-    LinkedList<WebElement> allPostedElements;
+    @FindAll(@FindBy(xpath = "//*[@class='post-img']"))
+    private List<WebElement> allPostedElements;
 
     @FindBy(xpath = "//*[@class='post-img']")
     private WebElement postElements;
@@ -30,7 +32,7 @@ public class ProfilePage {
     @FindBy(xpath = "//*[@formcontrolname='publicInfo']")
     public WebElement publicInfoTextArea;
 
-    @FindBy(xpath = "//*[@class='btn btn-primary']")
+    @FindBy(xpath = "//*[@type='submit']")
     public  WebElement editUserSaveButton;
 
     @FindBy(xpath = "//*/p/text()")
@@ -67,8 +69,8 @@ public class ProfilePage {
 //    }
 
     public void clickLastElement(){
-        WebElement lastElement = allPostedElements.getLast();
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebElement lastElement = allPostedElements.get(allPostedElements.size()-1);
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(lastElement));
         lastElement.click();
     }

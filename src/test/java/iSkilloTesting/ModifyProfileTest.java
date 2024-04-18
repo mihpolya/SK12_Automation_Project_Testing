@@ -33,9 +33,10 @@ public class ModifyProfileTest extends TestObject{
         header.clickProfile();
         Assert.assertTrue(profilePage.isUrlLoaded(userId), "Current page is not profile page for "+ userId);
         profilePage.clickEditUserButton();
+        profilePage.publicInfoTextArea.clear();
         profilePage.fillInPublicInfoTextArea(text);
         profilePage.clickEditUserSaveButton();
-        Assert.assertEquals(profilePage.profileText(text), "Public info does not match the entered text");
+        Assert.assertEquals(profilePage.profileText(text), text);
 
 
     }

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class SignUpPage {
-    public static final String PAGE_URL = "http://training.skillo-bg.com:4300/users/register";
+    public static final String PAGE_URL = "http://training.skillo-bg.com:4200/users/register";
     private final WebDriver webDriver;
 
     public SignUpPage(WebDriver driver){
