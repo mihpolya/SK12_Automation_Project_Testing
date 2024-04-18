@@ -22,7 +22,6 @@ public class PostPage {
     private WebElement postCaption;
     @FindBy(id = "create-post")
     private WebElement createPostButton;
-
     public boolean isNewPostLoaded(){
         return newPostTitle.isDisplayed();
     }
@@ -30,7 +29,6 @@ public class PostPage {
         WebElement uploadFile = webDriver.findElement(By.xpath("//*[@class='form-group']/input[@type='file']"));
         uploadFile.sendKeys(file.getAbsolutePath());
     }
-
     public boolean isImageUploaded(String fileName){
         String actualText = uploadPictureText.getAttribute("placeholder");
         if (actualText.equals(fileName)){
@@ -38,21 +36,17 @@ public class PostPage {
         }
         return false;
     }
-
     public String uploadedImageText(){
         return uploadPictureText.getAttribute("placeholder");
     }
-
     public void typePostCaption(String text){
         postCaption.sendKeys(text);
     }
-
     public void clickCreatePost(){
         //create validation with createPostButton.isEnabled();
        // Assert.
         createPostButton.click();
     }
-
     public void quickPost(String username, String password, File postPicture, String caption){
         LoginPage loginPage = new LoginPage(webDriver);
         Header header = new Header(webDriver);

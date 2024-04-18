@@ -1,9 +1,6 @@
 package iSkilloTesting;
 
-import factory.Header;
-import factory.LoginPage;
-import factory.PostPage;
-import factory.ProfilePage;
+import factory.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -24,11 +21,14 @@ public class FollowTest extends TestObject{
         Header header = new Header(webDriver);
         LoginPage loginPage = new LoginPage(webDriver);
         ProfilePage profilePage = new ProfilePage(webDriver);
+        HomePage homePage = new HomePage(webDriver);
 
         loginPage.navigateTo();
         Assert.assertTrue(loginPage.isUrlLoaded(), "Current page is not login");
         loginPage.completeSignIn(username, password);
-        header.clickProfile();
-        Assert.assertTrue(profilePage.isUrlLoaded(userId), "Current page is not profile page for "+ userId);
+        Assert.assertTrue(homePage.isUrlLoaded(), "Current page is not home page");
+        homePage.checkTheUserId();
+        homePage.clickFollowButton();
+        Assert.assertTrue(homePage.isUserFollowed(), "The user is not followed");
     }
 }
