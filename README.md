@@ -18,3 +18,5 @@ Test scenarios:
 4. Login and delete a post
    
 5. Login and update the personal info
+  
+6. Login and follow another user
