@@ -6,12 +6,13 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.io.*;
-import java.util.LinkedList;
 import java.util.List;
+import java.io.*;
+import java.lang.Thread;
 
 public class ProfilePage {
     public static final String PAGE_URL = "http://training.skillo-bg.com:4200/users/";
@@ -36,6 +37,7 @@ public class ProfilePage {
         this.webDriver = driver;
         PageFactory.initElements(webDriver(), this);
     }
+
     public WebDriver webDriver()
     {
         return this.webDriver;
@@ -86,4 +88,18 @@ public class ProfilePage {
     public String profileText(String text) {
         return text;
     }
+    public int countTheElementsBeforePost(){
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfAllElements(allPostedElements));
+        return allPostedElements.size();
+    }
+
+    public int countTheElementsAfterPost() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(240));
+        wait.until(ExpectedConditions.visibilityOfAllElements(allPostedElements));
+        Thread.sleep(1000);
+        return allPostedElements.size();
+    }
+
+
 }
