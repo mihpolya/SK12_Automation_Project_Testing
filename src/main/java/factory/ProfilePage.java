@@ -21,6 +21,8 @@ public class ProfilePage {
     private List<WebElement> allPostedElements;
     @FindBy(xpath = "//*[@class='post-img']")
     private WebElement postElements;
+    @FindBy(xpath = "//*[@class='post-modal-img']")
+    private WebElement imageDetailedView;
     @FindBy(xpath = "//*[@class ='delete-ask']/a")
     private WebElement postElementDeleteButton;
     @FindBy(xpath = "//*[@class ='delete-confirm']/button[contains(text(),'Yes')]")
@@ -58,6 +60,11 @@ public class ProfilePage {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(lastElement));
         lastElement.click();
+    }
+    public boolean isImageDetailedViewOpened(){
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfAllElements(imageDetailedView));
+        return true;
     }
     public void clickPostElementDeleteButton(){
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));

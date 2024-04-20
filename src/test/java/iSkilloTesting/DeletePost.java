@@ -1,18 +1,14 @@
 package iSkilloTesting;
 
-import factory.Header;
-import factory.LoginPage;
+
 import factory.PostPage;
 import factory.ProfilePage;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import java.util.LinkedList;
+import java.io.File;
+
 
 
 import java.io.File;
@@ -25,22 +21,29 @@ public class DeletePost extends TestObject{
         String caption = "Testing upload file";
         return new Object[][]{
 
-                {"mihpolyaTest","Tyui123Tyuio", postPicture, caption}
+                {"mihpolyaTest","Tyui123Tyuio", "5737", postPicture, caption}
         };
     }
     @Test(dataProvider = "getUser")
     //login and create a post in quick steps as precondition for the Delete test
-     public void  deletePost(String username, String password, File postPicture, String caption){
+     public void  deletePost(String username, String password, String userId,File postPicture, String caption) throws InterruptedException {
 
         WebDriver webDriver = super.getWebDriver();
         ProfilePage profilePage = new ProfilePage(webDriver);
         PostPage createPost = new PostPage(webDriver);
 
-        createPost.quickPost(username,password,postPicture,caption);
+        createPost.quickPost(username,password,userId,postPicture,caption);
+        Assert.assertTrue(profilePage.isUrlLoaded(), "Current page is not profile page");
+        Assert.assertTrue(profilePage.isUrlLoaded(userId), "Current page in not profile page for " + userId + " user");
+
+        int countBefore = profilePage.countTheElementsBeforePost();
         profilePage.clickLastElement();
+        Assert.assertTrue(profilePage.isImageDetailedViewOpened(), "The image detailed view is not opened");
+
         profilePage.clickPostElementDeleteButton();
         profilePage.clickConfirmDeleteButton();
-
+        int countAfter = profilePage.countTheElementsAfterPost();
+        Assert.assertNotEquals(countBefore,countAfter, "No image is uploaded");
     }
 
 }

@@ -5,8 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.time.Duration;
 
 public class PostPage {
     private final WebDriver webDriver;
@@ -22,6 +25,8 @@ public class PostPage {
     private WebElement postCaption;
     @FindBy(id = "create-post")
     private WebElement createPostButton;
+
+
     public boolean isNewPostLoaded(){
         return newPostTitle.isDisplayed();
     }
@@ -47,7 +52,8 @@ public class PostPage {
        // Assert.
         createPostButton.click();
     }
-    public void quickPost(String username, String password, File postPicture, String caption){
+
+    public void quickPost(String username, String password, String userId, File postPicture, String caption){
         LoginPage loginPage = new LoginPage(webDriver);
         Header header = new Header(webDriver);
         PostPage postPage = new PostPage(webDriver);

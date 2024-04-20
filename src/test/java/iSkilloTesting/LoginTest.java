@@ -41,9 +41,7 @@ public class LoginTest extends TestObject{
         Assert.assertTrue(loginPage.isCheckedRememberMe(), "Remember me checkbox is not checked.");
 
         loginPage.clickSignIn();
-
         header.clickProfile();
-
         Assert.assertTrue(profilePage.isUrlLoaded(), "Current page is not profile page");
         Assert.assertTrue(profilePage.isUrlLoaded(userId), "Current page in not profile page for " + userId + " user");
 
