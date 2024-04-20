@@ -7,16 +7,14 @@ This final project of the automation testing course in Skillo Academy includes:
  - if a test failure occurs, there must be a screenshot saved in a directory of the project
 
 
-Test scenarios:
+Tests included in the project:
 
-1. Create a new profile
+1. LoginTest - Login with existing valid credentials
 
-2. Login with existing valid credentials
+2. ModifyProfileTest - Login and update the personal info
     
-3. Login in and create a post
-   
-4. Login and delete a post
-   
-5. Login and update the personal info
-  
-6. Login and follow another user
+3. FollowTest - Login and follow another user
+
+4. Login in and create a post 
+
+5. Login and delete a post

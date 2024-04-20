@@ -19,7 +19,6 @@ public class HomePage {
     public static final String HOME_URL = "http://training.skillo-bg.com:4200/posts/all";
     private final WebDriver webDriver;
     String myId = "/users/5737";
-    private WebElement userToFollow;
     @FindAll(@FindBy(xpath = "//a[@class='post-user']"))
     private List<WebElement> loadedUsersOnThePage;
     @FindBy(xpath = "//*[@class='col-6 follow-buttons']/button")
@@ -31,7 +30,6 @@ public class HomePage {
     public void navigateTo(){
         this.webDriver.get(HOME_URL);
     }
-
     public boolean isUrlLoaded(){
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.urlToBe(HOME_URL));
@@ -39,8 +37,6 @@ public class HomePage {
     public void checkTheUserId(){
         for(WebElement user : loadedUsersOnThePage){
             if(!user.getAttribute("href").equals(myId)){
-//                clickFollowButton();
-//                userToFollow = user;
                 break;
             }
             scrollDown();

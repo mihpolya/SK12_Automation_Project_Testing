@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class LoginPage {
-    public static final String PAGE_URL = "http://training.skillo-bg.com:4300/users/login";
+    public static final String PAGE_URL = "http://training.skillo-bg.com:4200/users/login";
     private final WebDriver webDriver;
     public LoginPage(WebDriver driver){
         this.webDriver = driver;

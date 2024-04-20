@@ -18,7 +18,6 @@ public class CreatePost extends TestObject{
                 {"mihpolyaTest","Tyui123Tyuio", "5737", postPicture, caption}
         };
     }
-
    @Test(dataProvider = "getUser")
     public void testCreatePost(String username, String password, String userId, File postPicture, String caption) throws InterruptedException {
        WebDriver webDriver = super.getWebDriver();
@@ -33,8 +32,10 @@ public class CreatePost extends TestObject{
 
        loginPage.completeSignIn(username, password);
        Assert.assertTrue(homePage.isUrlLoaded(), "Current page is not home page");
+
        header.clickProfile();
        Assert.assertTrue(profilePage.isUrlLoaded(userId), "Current page is not profile page for "+ userId);
+
        int countBefore = profilePage.countTheElementsBeforePost();
        header.clickNewPost();
        Assert.assertTrue(postPage.isNewPostLoaded(), "The new post form is not loaded");

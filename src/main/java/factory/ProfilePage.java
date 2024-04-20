@@ -6,12 +6,10 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
-import java.io.*;
 import java.lang.Thread;
 
 public class ProfilePage {
@@ -19,8 +17,6 @@ public class ProfilePage {
     private final WebDriver webDriver;
     @FindAll(@FindBy(xpath = "//*[@class='post-img']"))
     private List<WebElement> allPostedElements;
-    @FindBy(xpath = "//*[@class='post-img']")
-    private WebElement postElements;
     @FindBy(xpath = "//*[@class='post-modal-img']")
     private WebElement imageDetailedView;
     @FindBy(xpath = "//*[@class ='delete-ask']/a")
@@ -33,13 +29,14 @@ public class ProfilePage {
     public WebElement publicInfoTextArea;
     @FindBy(xpath = "//*[@type='submit']")
     private  WebElement editUserSaveButton;
-    @FindBy(xpath = "//*/p/text()")
-    public WebElement profileText;
+    @FindBy(xpath = "//p")
+    private WebElement profileText;
+    @FindBy(xpath = "//app-edit-profile-modal/div")
+    private WebElement modifyProfileForm;
     public ProfilePage(WebDriver driver){
         this.webDriver = driver;
         PageFactory.initElements(webDriver(), this);
     }
-
     public WebDriver webDriver()
     {
         return this.webDriver;
@@ -61,7 +58,7 @@ public class ProfilePage {
         wait.until(ExpectedConditions.elementToBeClickable(lastElement));
         lastElement.click();
     }
-    public boolean isImageDetailedViewOpened(){
+    public boolean isElementDetailedViewOpened(){
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfAllElements(imageDetailedView));
         return true;
@@ -82,30 +79,35 @@ public class ProfilePage {
         editUserButton.click();
     }
     public void fillInPublicInfoTextArea(String text){
-
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOf(publicInfoTextArea));
         publicInfoTextArea.sendKeys(text);
+    }
+    public String getPublicInfoTextAreaText(){
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOf(profileText));
+        return profileText.getText();
     }
     public void clickEditUserSaveButton(){
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(editUserSaveButton));
         editUserSaveButton.click();
     }
-    public String profileText(String text) {
-        return text;
-    }
     public int countTheElementsBeforePost(){
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfAllElements(allPostedElements));
         return allPostedElements.size();
     }
-
     public int countTheElementsAfterPost() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(240));
         wait.until(ExpectedConditions.visibilityOfAllElements(allPostedElements));
         Thread.sleep(1000);
         return allPostedElements.size();
+    }
+    public boolean isModifyFormOpened(){
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOf(modifyProfileForm));
+        return true;
     }
 
 

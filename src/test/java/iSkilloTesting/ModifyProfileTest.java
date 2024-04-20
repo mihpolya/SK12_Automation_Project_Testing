@@ -1,6 +1,7 @@
 package iSkilloTesting;
 
 import factory.Header;
+import factory.HomePage;
 import factory.LoginPage;
 import factory.ProfilePage;
 import org.openqa.selenium.WebDriver;
@@ -25,18 +26,24 @@ public class ModifyProfileTest extends TestObject{
         Header header = new Header(webDriver);
         LoginPage loginPage = new LoginPage(webDriver);
         ProfilePage profilePage = new ProfilePage(webDriver);
+        HomePage homePage = new HomePage(webDriver);
 
         loginPage.navigateTo();
         Assert.assertTrue(loginPage.isUrlLoaded(), "Current page is not login");
 
         loginPage.completeSignIn(username, password);
+        Assert.assertTrue(homePage.isUrlLoaded(), "Current page is not home page");
+
         header.clickProfile();
         Assert.assertTrue(profilePage.isUrlLoaded(userId), "Current page is not profile page for "+ userId);
+
         profilePage.clickEditUserButton();
+        Assert.assertTrue(profilePage.isModifyFormOpened(), "The modify form is not opened");
+
         profilePage.publicInfoTextArea.clear();
         profilePage.fillInPublicInfoTextArea(text);
         profilePage.clickEditUserSaveButton();
-        Assert.assertEquals(profilePage.profileText(text), text);
+        Assert.assertTrue(profilePage.getPublicInfoTextAreaText().contains(text));
 
 
     }

@@ -25,8 +25,6 @@ public class PostPage {
     private WebElement postCaption;
     @FindBy(id = "create-post")
     private WebElement createPostButton;
-
-
     public boolean isNewPostLoaded(){
         return newPostTitle.isDisplayed();
     }
@@ -48,11 +46,10 @@ public class PostPage {
         postCaption.sendKeys(text);
     }
     public void clickCreatePost(){
-        //create validation with createPostButton.isEnabled();
-       // Assert.
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.elementToBeClickable(createPostButton));
         createPostButton.click();
     }
-
     public void quickPost(String username, String password, String userId, File postPicture, String caption){
         LoginPage loginPage = new LoginPage(webDriver);
         Header header = new Header(webDriver);

@@ -17,27 +17,18 @@ public class Header {
     private WebElement profilePageLink;
     @FindBy(id = "nav-link-new-post")
     private WebElement newPostLink;
-
     @FindBy(xpath = "//h3[text()='Post a picture to share with your awesome followers']")
     private WebElement newPostTitle;
     public Header(WebDriver driver){
         this.webDriver = driver;
         PageFactory.initElements(webDriver, this);
     }
-
     public void clickLogin(){
         loginLink.click();
     }
-
     public void clickNewPost(){
         newPostLink.click();
     }
-
-
-    public boolean isEnabledLoginLink(){
-        return loginLink.isEnabled();
-    }
-
     public void clickProfile(){
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(profilePageLink));

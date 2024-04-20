@@ -9,10 +9,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.io.File;
 
-
-
-import java.io.File;
-
 public class DeletePost extends TestObject{
 
     @DataProvider(name="getUser")
@@ -38,7 +34,7 @@ public class DeletePost extends TestObject{
 
         int countBefore = profilePage.countTheElementsBeforePost();
         profilePage.clickLastElement();
-        Assert.assertTrue(profilePage.isImageDetailedViewOpened(), "The image detailed view is not opened");
+        Assert.assertTrue(profilePage.isElementDetailedViewOpened(), "The image detailed view is not opened");
 
         profilePage.clickPostElementDeleteButton();
         profilePage.clickConfirmDeleteButton();

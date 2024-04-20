@@ -25,8 +25,10 @@ public class FollowTest extends TestObject{
 
         loginPage.navigateTo();
         Assert.assertTrue(loginPage.isUrlLoaded(), "Current page is not login");
+
         loginPage.completeSignIn(username, password);
         Assert.assertTrue(homePage.isUrlLoaded(), "Current page is not home page");
+
         homePage.checkTheUserId();
         homePage.clickFollowButton();
         Assert.assertTrue(homePage.isUserFollowed(), "The user is not followed");
