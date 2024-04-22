@@ -25,11 +25,12 @@ public class PostPage {
     private WebElement postCaption;
     @FindBy(id = "create-post")
     private WebElement createPostButton;
+    @FindBy(xpath = "//*[@class='form-group']/input[@type='file']")
+    private WebElement uploadFile;
     public boolean isNewPostLoaded(){
         return newPostTitle.isDisplayed();
     }
     public void uploadPicture(File file){
-        WebElement uploadFile = webDriver.findElement(By.xpath("//*[@class='form-group']/input[@type='file']"));
         uploadFile.sendKeys(file.getAbsolutePath());
     }
     public boolean isImageUploaded(String fileName){
